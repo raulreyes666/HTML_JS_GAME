@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego controlado desde la consola</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Esto asegura que el cuerpo ocupa toda la altura de la ventana. */
+        }
+
+        #game-container {
+            width: 500px;
+            height: 500px;
+            position: relative;
+            z-index: 1;
+            margin: 50px auto;
+            background-color: rgba(255, 255, 255, 0.5);
+            background-image: url('city.jpg'); /* Establecer la imagen de fondo */
+            background-size: cover; /* Ajustar la imagen al tamaño del contenedor */
+        }
+
+        #player {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            
+        }
+
+        #player img {
+            max-width: 100%;
+            max-height: 100%;
+         
+        }
+
+        /* Estilos para las partículas */
+        #particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background-color: rgb(65, 148, 65);
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="player">
+            <img src="dog.png" alt="Jugador">
+        </div>
+    </div>
+
+    <!-- Partículas -->
+    <div id="particles-container"></div>
+
+    <script>
+        const player = document.getElementById('player');
+        let playerX = 50; // Posición inicial del jugador en X
+        let playerY = 50; // Posición inicial del jugador en Y
+
+        // Función para actualizar la posición del jugador en el juego
+        function updatePlayerPosition() {
+            player.style.left = playerX + 'px';
+            player.style.top = playerY + 'px';
+        }
+
+        // Ejemplo de función para mover el cuadrado hacia la derecha
+        function derecha() {
+            playerX += 10;
+            updatePlayerPosition();
+        }
+
+        // Ejemplo de función para mover el cuadrado hacia la izquierda
+        function izquierda() {
+            playerX -= 10;
+            updatePlayerPosition();
+        }
+
+        // Ejemplo de función para mover el cuadrado hacia arriba
+        function arriba() {
+            playerY -= 10;
+            updatePlayerPosition();
+        }
+
+        // Ejemplo de función para mover el cuadrado hacia abajo
+        function abajo() {
+            playerY += 10;
+            updatePlayerPosition();
+        }
+
+        // Generar partículas verdes en el fondo
+        const particlesContainer = document.getElementById('particles-container');
+        const numParticles = 100;
+
+        for (let i = 0; i < numParticles; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.width = '5px';
+            particle.style.height = '5px';
+            particle.style.backgroundColor = 'green';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = Math.random() * window.innerHeight + 'px';
+            particlesContainer.appendChild(particle);
+        }
+    </script>
+</body>
+</html>
